@@ -48,6 +48,12 @@ ansible-playbook destroy-infrastructure.yaml
 ```
 The Playbook execute Terraform and destroy the resources (Delete Instances, Floating IPs, Networks). The working directory is "roles/tf-infrastructure/terraform/"
 
+## Add new nodes into cluster
+```bash
+ansible-playbook k8s-scale.yaml -i env/inventory
+```
+The playbook will setup new nodes and join them already created cluster. You should run this, if you have changed workers amount bigger after creating cluster from `env/values.yaml`.
+
 ## What's happening
   - Create Infrastructure on Hetzner Cloud with Terraform (roles/tf-infrastructure/terraform/)
   - Prepare Kubernetes Tools and Configuration on all Servers

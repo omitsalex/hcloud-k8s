@@ -1,3 +1,9 @@
 ---
-- name: Join Kubernetes Master
-  shell: "{{lookup('file', '/tmp/join.sh')}}"
+- name: Check if node already joined
+  stat: 
+    path: /opt/worker.txt
+  register: worker
+
+- include: tasks.yaml
+  when: not worker.stat.exists
+

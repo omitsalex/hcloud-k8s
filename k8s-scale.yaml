@@ -1,0 +1,40 @@
+---
+- name: Prepare Kubernetes Tools and Configuration
+  hosts: allserver
+  gather_facts: yes
+  remote_user: k8s
+  become: yes
+  vars_files:
+    - "env/values.yaml"
+    - "env/ips.yaml"
+  roles:
+    - { role: kube-prepare, tags: kube-prepare }
+
+- name: Install Master-Node
+  hosts: master
+  gather_facts: yes
+  remote_user: k8s
+  become: yes
+  vars_files:
+    - "env/values.yaml"
+  vars:
+    version_1_16: "{{ kubenetes_version is version('1.16.0', operator='>=', strict=True) }}"
+  roles:
+    - { role: kube-master, tags: kube-master }
+
+- name: Join Worker-Nodes to Master
+  hosts: worker
+  gather_facts: yes
+  remote_user: k8s
+  become: yes
+  roles:
+    - { role: kube-worker, tags: kube-worker }
+
+- name: Local Cleanup
+  hosts: localhost
+  gather_facts: false
+  become: false
+  vars_files:
+    - "env/values.yaml"
+  roles:
+    - { role: local-cleanup, tags: local-cleanup }

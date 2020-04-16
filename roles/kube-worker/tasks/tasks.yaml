@@ -1,0 +1,6 @@
+---
+- name: Join Kubernetes Master
+  shell: "{{lookup('file', '/tmp/join.sh')}}"
+
+- name: Mark workers prepared
+  shell: touch /opt/worker.txt
