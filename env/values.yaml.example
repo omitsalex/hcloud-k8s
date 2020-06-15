@@ -17,5 +17,5 @@ my_ip_tag: tag=example
 # Domain for master, workers and lb. (rDNS, Hostname)
 domain: example.com
 # Tested 1.15.5 and 1.16.2 and 1.17.4
-kubenetes_version: 1.17.5
+kubenetes_version: 1.17.6
 local_kube_context_path: /home/<YOUR-USER>/.kube
