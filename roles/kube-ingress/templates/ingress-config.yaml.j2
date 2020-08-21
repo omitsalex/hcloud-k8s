@@ -1,0 +1,13 @@
+controller:
+  config:
+    use-proxy-protocol: "True"
+    ssl-redirect: "False"
+  replicaCount: 3
+  service:
+    type: LoadBalancer
+    annotations:
+      load-balancer.hetzner.cloud/name: k8s-loadbalancer
+      load-balancer.hetzner.cloud/use-private-ip: true
+      load-balancer.hetzner.cloud/algorithm-type: least_connections
+      load-balancer.hetzner.cloud/uses-proxyprotocol: true
+      load-balancer.hetzner.cloud/hostname: {{ lb_hostname }}

@@ -4,15 +4,31 @@ master_ips:
   - {{ ip }}
 {% endfor %}
 {% endfor %}
-worker_ips:
-{% for worker in tf.outputs.worker_ipv4.value %}
+worker1_ips:
+{% for worker in tf.outputs.worker1_ipv4.value %}
 {% for ip in worker %}
   - {{ ip }}
 {% endfor %}
 {% endfor %}
-floating_ipv4:
-{% for floats in tf.outputs.floating_ipv4.value %}
-{% for ip in floats %}
+worker2_ips:
+{% for worker in tf.outputs.worker2_ipv4.value %}
+{% for ip in worker %}
   - {{ ip }}
 {% endfor %}
+{% endfor %}
+worker3_ips:
+{% for worker in tf.outputs.worker3_ipv4.value %}
+{% for ip in worker %}
+  - {{ ip }}
+{% endfor %}
+{% endfor %}
+worker4_ips:
+{% for worker in tf.outputs.worker4_ipv4.value %}
+{% for ip in worker %}
+  - {{ ip }}
+{% endfor %}
+{% endfor %}
+lb_ips:
+{% for ip in tf.outputs.lb_ipv4.value %}
+  - {{ ip }}
 {% endfor %}

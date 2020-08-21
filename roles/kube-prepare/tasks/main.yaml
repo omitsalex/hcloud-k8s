@@ -6,4 +6,3 @@
 
 - include: tasks.yaml
   when: not prepared.stat.exists
-

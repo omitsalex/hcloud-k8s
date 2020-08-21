@@ -17,8 +17,6 @@
   become: yes
   vars_files:
     - "env/values.yaml"
-  vars:
-    version_1_16: "{{ kubenetes_version is version('1.16.0', operator='>=', strict=True) }}"
   roles:
     - { role: kube-master, tags: kube-master }
 

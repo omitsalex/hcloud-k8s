@@ -1,17 +1,18 @@
 # hcloud-k8s
 
-Install a Kubernetes Cluster on Hetzner Cloud. The Playbook install a Master and Workers with Private Networking inclusive Cloud Controller Manager for Hetzner Cloud, Load Balancer and Failover IPs.
+Install a Kubernetes Cluster on Hetzner Cloud.
+The Playbook install a Master and Workers with Private Networking inclusive Cloud Controller Manager for Hetzner Cloud with a Load Balancer.
 
-Tested Versions Kubernetes v1.15.5 and v1.16.x and v1.17.4
+Tested Versions Kubernetes v1.19.6
 
 ---
 # Forked to align with more current dependencies
 
 ## Local Requirements
   - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-  - Terraform v0.12.24 (https://github.com/tfutils/tfenv#installation)
-  - Helm v3.1.2 (https://github.com/helm/helm#install)
-  - Kubectl v1.17.3 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+  - Terraform v0.12.29 (https://github.com/tfutils/tfenv#installation)
+  - Helm v3.4.2 (https://github.com/helm/helm#install)
+  - Kubectl v1.19.6 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Prerequirments edit the following files
   - create a HCloud Project in Hetzner Cloud Console
@@ -30,7 +31,7 @@ The Playbook execute Terraform and apply the resources. The working directory is
 ```bash
 ansible-playbook k8s-install.yaml -i env/inventory
 ```
-Install Kubernetes, Master, Workers, Metal Load Balancer, FIP Controller for IP failover.
+Install Kubernetes, Master, Workers, Load Balancer.
 
 Test on your local machine if all works after few minutes:
 ```bash
@@ -46,7 +47,7 @@ ansible-playbook get-kubeconfig.yaml -i env/inventory
 ```bash
 ansible-playbook destroy-infrastructure.yaml
 ```
-The Playbook execute Terraform and destroy the resources (Delete Instances, Floating IPs, Networks). The working directory is "roles/tf-infrastructure/terraform/"
+The Playbook execute Terraform and destroy the resources (Delete Instances, Load Balancers, Networks). The working directory is "roles/tf-infrastructure/terraform/"
 
 ## Add new nodes into cluster
 ```bash
@@ -56,39 +57,19 @@ The playbook will setup new nodes and join them already created cluster. You sho
 
 ## What's happening
   - Create Infrastructure on Hetzner Cloud with Terraform (roles/tf-infrastructure/terraform/)
+    - Create 1 master
+    - Create up to 4 different workers (depends on config-types)
+    - Create a hetzner loadbalancer
   - Prepare Kubernetes Tools and Configuration on all Servers
   - Install Master-Node
   - Join Worker-Nodes to Master
-  - Install Metal Load Balancer and IP failover Configuration (FIP)
-    - [MetalLB](https://metallb.universe.tf/)
-    - [Hetzner Cloud floating IP controller](https://github.com/cbeneke/hcloud-fip-controller)
+  - Install NGINX Ingress & Cert-Manager (Let's Encrypt! with prod & staging certificate)
   - Cleanup
 
 ## Caution Security
-  - Tiller is unsecure installed without certs (secure: https://medium.com/google-cloud/install-secure-helm-in-gke-254d520061f7)
   - No network policy enabled (multi-tenancy is dangerous)
   - No pod policy - privileged pods are allowed
   - Instances/Cluster not secured by a VPC (also have public IPs)
-
-### Info MetalLB
-
-Hetzner Cloud does not support LoadBalancer as a Service (yet). Thus [MetalLB](https://metallb.universe.tf/) will be installed to make the LoadBalancer service type available in the cluster.
-
-> A Kubernetes LoadBalancer is typically managed by the cloud controller, but it is not implemented in the hcloud cloud controller (because its not supported by Hetzner Cloud). MetalLB is a project, which provides the LoadBalancer type for baremetal Kubernetes clusters. It announces changes of the IP address endpoint to neighbor-routers, but we will just make use of the LoadBalancer provision in the cluster.
-
-This will configure MetalLB to use the IPv4 floating IP as LoadBalancer IP. MetalLB can reuse IPs for multiple LoadBalancer services if some [conditions](https://metallb.universe.tf/usage/#ip-address-sharing) are met. This can be enabled by adding an annotation `metallb.universe.tf/allow-shared-ip` to the service.
-
-### Info floating IP failover
-
-As the floating IP is bound to one server only I wrote a little controller, which will run in the cluster and reassign the floating IP to another server, if the currently assigned node becomes NotReady.
-
-> If you do not ensure, that the floating IP is always associated to a node in status Ready your cluster will not be high available, as the traffic can be routed to a (potentially) broken node.
-
-[Hetzner Cloud floating IP controller](https://github.com/cbeneke/hcloud-fip-controller)
-
-> If you did not set up the hcloud cloud controller, the external IP of the nodes might be announced as internalIP of the nodes in the Kubernetes cluster. In that event you must change `nodeAddressType` in the config to `internal` for the floating IP controller to work correctly.
-
-Please be aware, that the project is still in development and the config might be changed drastically in the future. Refer to the [GitHub repository](https://github.com/cbeneke/hcloud-fip-controller) for config options etc.
 
 ### Credits
 

@@ -1,0 +1,22 @@
+---
+- name: Add Namespace for ingress-nginx
+  shell: kubectl create namespace ingress-nginx
+
+- name: Add ingress-nginx helm repository
+  shell: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx && helm repo update
+
+- name: Create ingress configuration for nginx
+  template:
+    src: ingress-config.yaml.j2
+    dest: /tmp/k8s-install/ingress-config.yaml
+
+- name: Deploy ingress-nginx via helm
+  shell: helm install --namespace=ingress-nginx ingress ingress-nginx/ingress-nginx -f /tmp/k8s-install/ingress-config.yaml
+
+- name: Mark ingress done
+  file:
+    path: /opt/ingress.txt
+    state: touch
+    mode: u+rw,g-wx,o-rwx
+    modification_time: preserve
+    access_time: preserve

@@ -15,32 +15,57 @@ variable "master_servertype" {
   description = "Master Server Type - Replaced by Ansible Playbook on run"
 }
 
-variable "worker_servertype" {
+variable "worker1_servertype" {
   type        = string
-  description = "Worker Server Type - Replaced by Ansible Playbook on run"
+  description = "Worker1 Server Type - Replaced by Ansible Playbook on run"
 }
 
-variable "worker_count" {
-  type        = number
-  description = "Worker count - Replaced by Ansible Playbook on run"
-}
-
-variable "floatip_count" {
-  type        = number
-  description = "Floating IPs count - Replaced by Ansible Playbook on run"
-}
-
-variable "use_my_ip" {
-  type        = number
-  description = "Use Existing IP - Replaced by Ansible Playbook on run"
-}
-
-variable "my_ip_tag" {
+variable "worker2_servertype" {
   type        = string
-  description = "Floating IP tag - Replaced by Ansible Playbook on run"
+  description = "Worker2 Server Type - Replaced by Ansible Playbook on run"
+}
+
+variable "worker3_servertype" {
+  type        = string
+  description = "Worker3 Server Type - Replaced by Ansible Playbook on run"
+}
+
+variable "worker4_servertype" {
+  type        = string
+  description = "Worker4 Server Type - Replaced by Ansible Playbook on run"
+}
+
+variable "worker1_count" {
+  type        = number
+  description = "Worker1 count - Replaced by Ansible Playbook on run"
+}
+
+variable "worker2_count" {
+  type        = number
+  description = "Worker2 count - Replaced by Ansible Playbook on run"
+}
+
+variable "worker3_count" {
+  type        = number
+  description = "Worker3 count - Replaced by Ansible Playbook on run"
+}
+
+variable "worker4_count" {
+  type        = number
+  description = "Worker4 count - Replaced by Ansible Playbook on run"
 }
 
 variable "domain" {
   type        = string
-  description = "Top Level Domain - Replaced by Absible Playbook on run"
+  description = "Top Level Domain - Replaced by Ansible Playbook on run"
+}
+
+variable "lb_type" {
+  type        = string
+  description = "Loadbalancer Type - Replaced by Ansible Playbook on run"
+}
+
+variable "lb_datacenter" {
+  type        = string
+  description = "Loadbalancer datacenter - Replaced by Ansible Playbook on run"
 }

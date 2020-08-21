@@ -1,0 +1,29 @@
+---
+- name: Wait for cert-manager pods to come up
+  shell: kubectl get pods -o json -n cert-manager
+  register: kubectl_get_pods
+  until: kubectl_get_pods.stdout|from_json|json_query('items[*].status.phase')|unique == ["Running"]
+
+- name: Create staging cluster issuer configuration for cert-manager
+  template:
+    src: staging.yaml.j2
+    dest: /tmp/k8s-install/cert-staging.yaml
+
+- name: Create staging cluster issuer for cert-manager
+  shell: kubectl apply -f /tmp/k8s-install/cert-staging.yaml
+
+- name: Create production cluster issuer configuration for cert-manager
+  template:
+    src: production.yaml.j2
+    dest: /tmp/k8s-install/cert-prod.yaml
+
+- name: Create production cluster issuer for cert-manager
+  shell: kubectl apply -f /tmp/k8s-install/cert-prod.yaml
+
+- name: Mark Cert-Issuer done
+  file:
+    path: /opt/cert_mgr_issuer.txt
+    state: touch
+    mode: u+rw,g-wx,o-rwx
+    modification_time: preserve
+    access_time: preserve

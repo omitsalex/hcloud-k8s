@@ -1,0 +1,11 @@
+---
+- name: Install Cert-Manager
+  shell: kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.1/cert-manager.yaml
+
+- name: Mark Cert-Manager installation done
+  file:
+    path: /opt/cert_mgr_installed.txt
+    state: touch
+    mode: u+rw,g-wx,o-rwx
+    modification_time: preserve
+    access_time: preserve

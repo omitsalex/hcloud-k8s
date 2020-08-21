@@ -14,17 +14,20 @@ packages:
   - curl
   - software-properties-common
   - python
+  - python-yaml
   - iptables-persistent
   - gnupg-agent
 runcmd:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
   - curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+  - curl -fsSL https://baltocdn.com/helm/signing.asc | sudo apt-key add -
   - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
   - add-apt-repository "deb http://packages.cloud.google.com/apt/ kubernetes-xenial main"
+  - add-apt-repository "deb https://baltocdn.com/helm/stable/debian/ all main"
   - apt update
   - swapoff -a
-  - apt install -y docker-ce kubelet={{ kubenetes_version }}-00 kubeadm={{ kubenetes_version }}-00 kubectl={{ kubenetes_version }}-00
-  - apt-mark hold docker-ce kubelet kubeadm kubectl
+  - apt install -y docker-ce kubelet={{ kubenetes_version }}-00 kubeadm={{ kubenetes_version }}-00 kubectl={{ kubenetes_version }}-00 helm
+  - apt-mark hold docker-ce kubelet kubeadm kubectl helm
   - usermod -aG docker k8s
   - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
   - sed -i -e '/^PasswordAuthentication/s/^.*$/PasswordAuthentication no/' /etc/ssh/sshd_config

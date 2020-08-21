@@ -1,0 +1,24 @@
+---
+- name: Check if ingress already configured
+  stat:
+    path: /opt/ingress.txt
+  register: ingress
+
+- include: ingress.yaml
+  when: not ingress.stat.exists
+
+- name: Check if cert-manager is already installed
+  stat:
+    path: /opt/cert_mgr_installed.txt
+  register: cert_mgr_installed
+
+- include: cert-manager.yaml
+  when: not cert_mgr_installed.stat.exists
+
+- name: Check if cert-issuer are already set
+  stat:
+    path: /opt/cert_mgr_issuer.txt
+  register: cert_mgr_issuer
+
+- include: issuer.yaml
+  when: not cert_mgr_issuer.stat.exists

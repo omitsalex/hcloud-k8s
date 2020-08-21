@@ -3,4 +3,9 @@
   shell: "{{lookup('file', '/tmp/join.sh')}}"
 
 - name: Mark workers prepared
-  shell: touch /opt/worker.txt
+  file:
+    path: /opt/worker.txt
+    state: touch
+    mode: u+rw,g-wx,o-rwx
+    modification_time: preserve
+    access_time: preserve

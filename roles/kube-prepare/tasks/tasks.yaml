@@ -7,14 +7,6 @@
     msg: "Server is not ready!!!"
   when: not ready.stat.exists
 
-- name: Configure floating IPs
-  template:
-    src: 60-floating-ip.j2
-    dest: /etc/network/interfaces.d/60-floating-ip.cfg
-
-- name: Restart Networking
-  shell: systemctl restart networking.service
-  
 - name: Copy cloud config provider flag for kubeadm
   copy:
     src: "{{ playbook_dir }}/roles/kube-prepare/files/20-hetzner-cloud.conf"
@@ -53,4 +45,9 @@
     state: mounted
 
 - name: Mark servers prepared
-  shell: touch /opt/prepared.txt
+  file:
+    path: /opt/prepared.txt
+    state: touch
+    mode: u+rw,g-wx,o-rwx
+    modification_time: preserve
+    access_time: preserve

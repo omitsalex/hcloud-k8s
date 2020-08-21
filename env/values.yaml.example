@@ -7,15 +7,25 @@ ssh_authorized_keys:
 datacenter: fsn1
 # Master and Worker Server Types
 master_servertype: cx11-ceph
-worker_servertype: cx11-ceph
+worker1_servertype: cx11-ceph
+worker2_servertype: cx11-ceph
+worker3_servertype: cx11-ceph
+worker4_servertype: cx11-ceph
+
+# Loadbalancer type
+lb_type: lb11
+# Loadbalancer Datacenter Name
+lb_datacenter: nbg1
+# Loadbalancer hostname
+lb_hostname: lb.example.org
 # Count Worker Nodes
-worker_count: 1
-# Count Pool IPs for Metal Load Balancer
-floatip_count: 1
-use_my_ip: 1
-my_ip_tag: tag=example
+worker1_count: 1
+worker2_count: 0
+worker3_count: 0
+worker4_count: 0
 # Domain for master, workers and lb. (rDNS, Hostname)
 domain: example.com
 # Tested 1.15.5 and 1.16.2 and 1.17.4
 kubenetes_version: 1.17.4
 local_kube_context_path: /home/<YOUR-USER>/.kube
+cert_email: user@sample.org
