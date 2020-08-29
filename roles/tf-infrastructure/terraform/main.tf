@@ -9,14 +9,14 @@ resource "hcloud_network" "default" {
 }
 
 resource "hcloud_network_subnet" "master" {
-  subnet_id   = hcloud_network.default.id
+  network_id   = hcloud_network.default.id
   type         = "server"
   network_zone = "eu-central"
   ip_range     = "10.0.1.0/24"
 }
 
 resource "hcloud_network_subnet" "worker" {
-  subnet_id   = hcloud_network.default.id
+  network_id   = hcloud_network.default.id
   type         = "server"
   network_zone = "eu-central"
   ip_range     = "10.0.2.0/24"
@@ -40,7 +40,7 @@ resource "hcloud_rdns" "rdns_master" {
 
 resource "hcloud_server_network" "master_network" {
   count      = length(hcloud_server.master)
-  subnet_id = hcloud_network.default.id
+  network_id = hcloud_network.default.id
   server_id  = hcloud_server.master.*.id[count.index]
   ip         = "10.0.1.${count.index + 2}"
 }
@@ -64,7 +64,7 @@ resource "hcloud_rdns" "rdns_worker" {
 
 resource "hcloud_server_network" "worker_network" {
   count      = length(hcloud_server.worker)
-  subnet_id = hcloud_network.default.id
+  network_id = hcloud_network.default.id
   server_id  = hcloud_server.worker.*.id[count.index]
   ip         = "10.0.2.${count.index + 1}"
 }
