@@ -10,9 +10,3 @@ worker_ips:
   - {{ ip }}
 {% endfor %}
 {% endfor %}
-floating_ipv4:
-{% for floats in tf.outputs.floating_ipv4.value %}
-{% for ip in floats %}
-  - {{ ip }}
-{% endfor %}
-{% endfor %}

@@ -2,19 +2,20 @@
 
 Install a Kubernetes Cluster on Hetzner Cloud. The Playbook install a Master and Workers with Private Networking inclusive Cloud Controller Manager for Hetzner Cloud, Load Balancer and Failover IPs.
 
-Tested Versions Kubernetes v1.15.5 and v1.16.x and v1.17.4
+Tested Versions Kubernetes v1.19.0
 
 ---
 # Forked to align with more current dependencies
 
 ## Local Requirements
   - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-  - Terraform v0.12.24 (https://github.com/tfutils/tfenv#installation)
-  - Helm v3.1.2 (https://github.com/helm/helm#install)
-  - Kubectl v1.17.3 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+  - Terraform >= v0.13.1 (https://github.com/tfutils/tfenv#installation)
+  - Helm >= v3.3.0 (https://github.com/helm/helm#install)
+  - Kubectl v1.90.0 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Prerequirments edit the following files
   - create a HCloud Project in Hetzner Cloud Console
+  - Create a floating IP with the name that you'll use as my_ip_tag in your values.yaml below
   - copy/rename "env/values.yaml.example" to "env/values.yaml"
   - create a API Token and set in "env/values.yaml"
   - edit the values in "env/values.yaml"
