@@ -5,7 +5,7 @@ Install a Kubernetes Cluster on Hetzner Cloud. The Playbook install a Master and
 Tested Versions Kubernetes v1.19.0
 
 ---
-# Forked to align with more current dependencies
+# Forked to align with more current dependencies - Note Load Balancer and Failover IPs not working yet (looking to switch from metallb)
 
 ## Local Requirements
   - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
