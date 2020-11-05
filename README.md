@@ -33,14 +33,14 @@ ansible-playbook k8s-install.yaml -i env/inventory
 ```
 Install Kubernetes, Master, Workers, Metal Load Balancer, FIP Controller for IP failover.
 
-Test on your local machine if all works after few minutes:
-```bash
-kubectl get pods --all-namespaces
-```
-
 ## Get Kube Config from Master Node
 ```bash
 ansible-playbook get-kubeconfig.yaml -i env/inventory
+```
+
+Test on your local machine if all works after few minutes:
+```bash
+kubectl get pods --all-namespaces
 ```
 
 ## Delete Kubernetes and destroy Infrastructure Ansible Playbook Terrafom Module

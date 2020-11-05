@@ -14,6 +14,7 @@
       datacenter: "{{ datacenter }}"
       master_servertype: "{{ master_servertype }}"
       worker_servertype: "{{ worker_servertype }}"
+      ssh_authorized_keys: "{{ ssh_authorized_keys }}"
       worker_count: "{{ worker_count }}"
       floatip_count: "{{ floatip_count }}"
       use_my_ip: "{{ use_my_ip }}"

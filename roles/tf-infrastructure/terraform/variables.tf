@@ -20,6 +20,11 @@ variable "worker_servertype" {
   description = "Worker Server Type - Replaced by Ansible Playbook on run"
 }
 
+variable "ssh_authorized_keys" {
+  type        = string
+  description = "ssh_authorized_keys - Replaced by Ansible Playbook on run"
+}
+
 variable "worker_count" {
   type        = number
   description = "Worker count - Replaced by Ansible Playbook on run"

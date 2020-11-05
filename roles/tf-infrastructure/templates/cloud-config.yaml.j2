@@ -5,9 +5,7 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
-{% for key in ssh_authorized_keys %}
-      - {{ key }}
-{% endfor %}
+      - {{ ssh_authorized_keys }}
 packages:
   - apt-transport-https
   - ca-certificates
