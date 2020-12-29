@@ -11,7 +11,6 @@ Tested Versions Kubernetes v1.19.6
 ## Local Requirements
   - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
   - Terraform v0.12.29 (https://github.com/tfutils/tfenv#installation)
-  - Helm v3.4.2 (https://github.com/helm/helm#install)
   - Kubectl v1.19.6 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Prerequirments edit the following files
