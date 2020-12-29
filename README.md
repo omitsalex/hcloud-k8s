@@ -20,6 +20,9 @@ Tested Versions Kubernetes v1.19.6
   - create a API Token and set in "env/values.yaml"
   - edit the values in "env/values.yaml"
 
+## Prerequriements for Ingress & Let's Encrypt! support
+  - Add for `lb_hostname` a valid DNS-Entry (necessary for Certificate Requests)
+
 ## Create Infrastructure Ansible Playbook Terrafom Module
 ```bash
 ansible-playbook create-infrastructure.yaml
