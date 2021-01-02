@@ -10,7 +10,6 @@ worker1_ips:
   - {{ ip }}
 {% endfor %}
 {% endfor %}
-<<<<<<< HEAD
 worker2_ips:
 {% for worker in tf.outputs.worker2_ipv4.value %}
 {% for ip in worker %}
@@ -33,5 +32,3 @@ lb_ips:
 {% for ip in tf.outputs.lb_ipv4.value %}
   - {{ ip }}
 {% endfor %}
-=======
->>>>>>> ae6eab3 (Remove metal-lb, floating-ip config. Update for kube 1.19, and associated images)

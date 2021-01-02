@@ -60,6 +60,12 @@
     src: /etc/kubernetes/admin.conf
   register: kubeconf
 
+- name: Create Join Command for the nodes1
+  become: true
+  become_user: root
+  shell: kubeadm token create --print-join-command
+  register: join
+
 - name: Save Join to file
   local_action: copy content="{{ join.stdout }}" dest="/tmp/join.sh"
   vars:

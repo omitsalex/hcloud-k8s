@@ -7,12 +7,12 @@
 - include: tasks.yaml
   when: not master.stat.exists
 
-- name: Create Join Command for the nodes
-  shell: kubeadm token create --print-join-command
+- name: Create Join Command for the nodes2
+  shell: sudo kubeadm token create --print-join-command
   register: join
   when: master.stat.exists
 
-- name: Save Join to file
+- name: Save Join to file2
   local_action: copy content="{{ join.stdout }}" dest="/tmp/join.sh"
   when: master.stat.exists
   vars:
