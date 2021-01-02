@@ -3,6 +3,7 @@ hetzner_token: XXXXxxxxxXXxxx...
 # Public SSH Keys to connect instances with ssh
 ssh_authorized_keys:
   - ssh-rsa AAAAB3XXXXXxxxx== gammpamm@example.com
+  ansible_ssh_private_key_file: <PATH-TO-YOUR-SSH-KEY>
 # Datacenter Name
 datacenter: fsn1
 # Master and Worker Server Types
@@ -15,7 +16,7 @@ worker4_servertype: cx11-ceph
 # Loadbalancer type
 lb_type: lb11
 # Loadbalancer Datacenter Name
-lb_datacenter: nbg1
+lb_datacenter: fsn1
 # Loadbalancer hostname
 lb_hostname: lb.example.org
 # Count Worker Nodes

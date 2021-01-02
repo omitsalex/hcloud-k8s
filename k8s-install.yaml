@@ -7,6 +7,8 @@
   vars_files:
     - "env/values.yaml"
     - "env/ips.yaml"
+  vars:
+    ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file }}"
   roles:
     - { role: kube-prepare, tags: kube-prepare }
 
@@ -17,6 +19,8 @@
   become: yes
   vars_files:
     - "env/values.yaml"
+  vars:
+    ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file }}"
   roles:
     - { role: kube-master, tags: kube-master }
 
@@ -29,6 +33,10 @@
   gather_facts: yes
   remote_user: k8s
   become: yes
+  vars_files:
+    - "env/values.yaml"
+  vars:
+    ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file }}"
   roles:
     - { role: kube-worker, tags: kube-worker }
 
@@ -40,6 +48,8 @@
   vars_files:
     - "env/values.yaml"
     - "env/ips.yaml"
+  vars:
+    ansible_ssh_private_key_file: "{{ ansible_ssh_private_key_file }}"
   roles:
     - { role: kube-ingress, tags: kube-ingress }
 
