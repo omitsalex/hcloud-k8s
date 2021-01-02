@@ -51,10 +51,6 @@
 - name: Deploy HCloud CSI hetznercloud/hcloud-csi-driver
   shell: kubectl create -f /tmp/k8s-install/hcloud-csi.yaml
 
-- name: Create Join Command for the nodes
-  shell: kubeadm token create --print-join-command
-  register: join
-
 - name: Copy Kube-Config to Local Device
   slurp:
     src: /etc/kubernetes/admin.conf
@@ -71,8 +67,8 @@
   vars:
      ansible_become: no
 
-- name: Save kubeconf to local kubectl
-  local_action: copy content="{{ kubeconf['content'] | b64decode }}" dest="{{ local_kube_context_path }}/config"
+- name: Save Join to file1
+  local_action: copy content="{{ join.stdout }}" dest="/tmp/join.sh"
   vars:
      ansible_become: no
 

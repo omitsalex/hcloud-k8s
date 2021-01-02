@@ -29,7 +29,7 @@ resource "hcloud_network_subnet" "worker" {
 resource "hcloud_server" "master" {
   count       = 1
   name        = "master"
-  image       = "ubuntu-18.04"
+  image       = "ubuntu-20.04"
   server_type = var.master_servertype
   location    = var.datacenter
   user_data   = file("./user-data/cloud-config.yaml")
@@ -54,6 +54,7 @@ resource "hcloud_server_network" "master_network" {
 }
 
 # Worker
+<<<<<<< HEAD
 resource "hcloud_server" "worker1" {
   count       = var.worker1_count
   name        = "node1-${count.index + 1}"
@@ -89,6 +90,13 @@ resource "hcloud_server" "worker4" {
   name        = "node4-${count.index + 1}"
   image       = "ubuntu-18.04"
   server_type = var.worker4_servertype
+=======
+resource "hcloud_server" "worker" {
+  count       = var.worker_count
+  name        = "node-${count.index + 1}"
+  image       = "ubuntu-20.04"
+  server_type = var.worker_servertype
+>>>>>>> 3b48988ba20602bcf62da1887ac41fb6f5aadc8d
   location    = var.datacenter
   user_data   = file("./user-data/cloud-config.yaml")
   labels      = {"lb" = "node4-${count.index + 1}","type" = "worker4"}

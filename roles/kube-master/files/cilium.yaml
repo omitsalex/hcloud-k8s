@@ -46,6 +46,9 @@ data:
   # removes all IPs from the IPAM block if a local route not owned by Cilium conflicts with it
   blacklist-conflicting-routes: "false"
 
+  # removes all IPs from the IPAM block if a local route not owned by Cilium conflicts with it
+  blacklist-conflicting-routes: "false"
+
   # Enable IPv4 addressing. If enabled, all endpoints are allocated an IPv4
   # address.
   enable-ipv4: "true"
