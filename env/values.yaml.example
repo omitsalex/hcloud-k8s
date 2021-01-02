@@ -25,7 +25,7 @@ worker3_count: 0
 worker4_count: 0
 # Domain for master, workers and lb. (rDNS, Hostname)
 domain: example.com
-# Tested 1.15.5 and 1.16.2 and 1.17.4
-kubenetes_version: 1.17.6
+# Tested 1.19.0
+kubenetes_version: 1.19.0
 local_kube_context_path: /home/<YOUR-USER>/.kube
 cert_email: user@sample.org

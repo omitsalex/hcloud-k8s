@@ -10,11 +10,13 @@ Tested Versions Kubernetes v1.19.6
 
 ## Local Requirements
   - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-  - Terraform v0.12.29 (https://github.com/tfutils/tfenv#installation)
   - Kubectl v1.19.6 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+  - Terraform >= v0.13.1 (https://github.com/tfutils/tfenv#installation)
+  - Helm >= v3.3.0 (https://github.com/helm/helm#install)
 
 ## Prerequirments edit the following files
   - create a HCloud Project in Hetzner Cloud Console
+  - Create a floating IP with the name that you'll use as my_ip_tag in your values.yaml below
   - copy/rename "env/values.yaml.example" to "env/values.yaml"
   - create a API Token and set in "env/values.yaml"
   - edit the values in "env/values.yaml"
