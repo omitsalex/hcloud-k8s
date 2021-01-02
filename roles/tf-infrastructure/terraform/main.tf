@@ -9,7 +9,7 @@ resource "hcloud_network" "default" {
 }
 
 resource "hcloud_network_subnet" "master" {
-  subnet_id   = hcloud_network.default.id
+  network_id   = hcloud_network.default.id
   type         = "server"
   network_zone = "eu-central"
   ip_range     = "10.0.1.0/24"
@@ -18,7 +18,7 @@ resource "hcloud_network_subnet" "master" {
 }
 
 resource "hcloud_network_subnet" "worker" {
-  subnet_id   = hcloud_network.default.id
+  network_id   = hcloud_network.default.id
   type         = "server"
   network_zone = "eu-central"
   ip_range     = "10.0.2.0/24"
