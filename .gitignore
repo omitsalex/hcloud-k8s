@@ -1,3 +1,4 @@
 env/inventory
 env/ips.yaml
 /*.retry
+*.lock.hcl

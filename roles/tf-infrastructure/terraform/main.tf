@@ -162,5 +162,5 @@ resource "hcloud_load_balancer_target" "k8s-targets" {
   label_selector = "lb"
   use_private_ip = true
 
-  depends_on = [hcloud_load_balancer_network.kubernetes]
+  depends_on = [hcloud_server_network.worker_network, hcloud_load_balancer_network.kubernetes]
 }

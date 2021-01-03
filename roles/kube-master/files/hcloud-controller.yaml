@@ -1,4 +1,4 @@
-# NOTE: this release was tested against kubernetes v1.18.x
+# NOTE: this release was tested against kubernetes v1.19.x
 ---
 apiVersion: v1
 kind: ServiceAccount

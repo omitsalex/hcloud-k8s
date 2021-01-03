@@ -9,10 +9,10 @@ Tested Versions Kubernetes v1.19.6
 # Forked to align with more current dependencies - Note Load Balancer and Failover IPs not working yet (looking to switch from metallb)
 
 ## Local Requirements
-  - Ansible v2.9.6 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+  - Ansible v2.10.4 (https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
   - Kubectl v1.19.6 (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-  - Terraform >= v0.13.1 (https://github.com/tfutils/tfenv#installation)
-  - Helm >= v3.3.0 (https://github.com/helm/helm#install)
+  - Terraform >= v0.14.3 (https://github.com/tfutils/tfenv#installation)
+  - Helm >= v3.4.2 (https://github.com/helm/helm#install)
 
 ## Prerequirments edit the following files
   - create a HCloud Project in Hetzner Cloud Console
